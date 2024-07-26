@@ -33,6 +33,8 @@
 		8B25C4E22C02739F00EC5F54 /* AppSettings.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8B25C4E12C02739F00EC5F54 /* AppSettings.swift */; };
 		8B25C4E42C02962800EC5F54 /* Motivation.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8B25C4E32C02962800EC5F54 /* Motivation.swift */; };
 		8B9675452C02429E005950FB /* GoogleGenerativeAI in Frameworks */ = {isa = PBXBuildFile; productRef = 8B9675442C02429E005950FB /* GoogleGenerativeAI */; };
+		8BCF12512C5318D600E7C2E2 /* APIKey.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8BCF12502C5318D600E7C2E2 /* APIKey.swift */; };
+		8BCF12532C53200700E7C2E2 /* Onboarding.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8BCF12522C53200700E7C2E2 /* Onboarding.swift */; };
 		8BF970022C02BC5900B78999 /* SplashView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8BF970012C02BC5900B78999 /* SplashView.swift */; };
 /* End PBXBuildFile section */
 
@@ -59,6 +61,8 @@
 		8B25C4E12C02739F00EC5F54 /* AppSettings.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppSettings.swift; sourceTree = "<group>"; };
 		8B25C4E32C02962800EC5F54 /* Motivation.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Motivation.swift; sourceTree = "<group>"; };
 		8B9675322C02420D005950FB /* Recap.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = Recap.app; sourceTree = BUILT_PRODUCTS_DIR; };
+		8BCF12502C5318D600E7C2E2 /* APIKey.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = APIKey.swift; sourceTree = "<group>"; };
+		8BCF12522C53200700E7C2E2 /* Onboarding.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Onboarding.swift; sourceTree = "<group>"; };
 		8BF970012C02BC5900B78999 /* SplashView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SplashView.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
@@ -134,6 +138,8 @@
 				8B25C4DB2C02654D00EC5F54 /* QuizProgressBar.swift */,
 				8BF970012C02BC5900B78999 /* SplashView.swift */,
 				787010352C0630C4004CDA60 /* ShareResults.swift */,
+				8BCF12502C5318D600E7C2E2 /* APIKey.swift */,
+				8BCF12522C53200700E7C2E2 /* Onboarding.swift */,
 			);
 			path = Views;
 			sourceTree = "<group>";
@@ -273,11 +279,13 @@
 				787010362C0630C4004CDA60 /* ShareResults.swift in Sources */,
 				78D4B7BE2C4881FD00411F8A /* YoutubeTranscript.swift in Sources */,
 				8BF970022C02BC5900B78999 /* SplashView.swift in Sources */,
+				8BCF12512C5318D600E7C2E2 /* APIKey.swift in Sources */,
 				8B25C4E42C02962800EC5F54 /* Motivation.swift in Sources */,
 				78222B702C40AFD700097269 /* TextOutputFormat.swift in Sources */,
 				787010182C0254AE004CDA60 /* Question.swift in Sources */,
 				787010212C0254AE004CDA60 /* RecapApp.swift in Sources */,
 				7870101A2C0254AE004CDA60 /* Quiz.swift in Sources */,
+				8BCF12532C53200700E7C2E2 /* Onboarding.swift in Sources */,
 				7870101E2C0254AE004CDA60 /* QuizView.swift in Sources */,
 				8B25C4DC2C02654D00EC5F54 /* QuizProgressBar.swift in Sources */,
 			);
@@ -413,7 +421,7 @@
 				CODE_SIGN_STYLE = Automatic;
 				CURRENT_PROJECT_VERSION = 425;
 				DEVELOPMENT_ASSET_PATHS = "\"Recap/Preview Content\"";
-				DEVELOPMENT_TEAM = SU5789R8HD;
+				DEVELOPMENT_TEAM = L3P446LNNP;
 				ENABLE_PREVIEWS = YES;
 				GENERATE_INFOPLIST_FILE = YES;
 				INFOPLIST_FILE = Recap/Info.plist;
@@ -425,12 +433,13 @@
 				INFOPLIST_KEY_UILaunchScreen_Generation = YES;
 				INFOPLIST_KEY_UISupportedInterfaceOrientations = UIInterfaceOrientationPortrait;
 				INFOPLIST_KEY_UISupportedInterfaceOrientations_iPad = "UIInterfaceOrientationLandscapeLeft UIInterfaceOrientationLandscapeRight UIInterfaceOrientationPortrait UIInterfaceOrientationPortraitUpsideDown";
+				IPHONEOS_DEPLOYMENT_TARGET = 17.0;
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",
 					"@executable_path/Frameworks",
 				);
 				MARKETING_VERSION = 0.6.9;
-				PRODUCT_BUNDLE_IDENTIFIER = com.click.Recap;
+				PRODUCT_BUNDLE_IDENTIFIER = com.aaronhma.Recap;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SUPPORTED_PLATFORMS = "iphoneos iphonesimulator";
 				SUPPORTS_MACCATALYST = NO;
@@ -450,7 +459,7 @@
 				CODE_SIGN_STYLE = Automatic;
 				CURRENT_PROJECT_VERSION = 425;
 				DEVELOPMENT_ASSET_PATHS = "\"Recap/Preview Content\"";
-				DEVELOPMENT_TEAM = SU5789R8HD;
+				DEVELOPMENT_TEAM = L3P446LNNP;
 				ENABLE_PREVIEWS = YES;
 				GENERATE_INFOPLIST_FILE = YES;
 				INFOPLIST_FILE = Recap/Info.plist;
@@ -462,12 +471,13 @@
 				INFOPLIST_KEY_UILaunchScreen_Generation = YES;
 				INFOPLIST_KEY_UISupportedInterfaceOrientations = UIInterfaceOrientationPortrait;
 				INFOPLIST_KEY_UISupportedInterfaceOrientations_iPad = "UIInterfaceOrientationLandscapeLeft UIInterfaceOrientationLandscapeRight UIInterfaceOrientationPortrait UIInterfaceOrientationPortraitUpsideDown";
+				IPHONEOS_DEPLOYMENT_TARGET = 17.0;
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",
 					"@executable_path/Frameworks",
 				);
 				MARKETING_VERSION = 0.6.9;
-				PRODUCT_BUNDLE_IDENTIFIER = com.click.Recap;
+				PRODUCT_BUNDLE_IDENTIFIER = com.aaronhma.Recap;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SUPPORTED_PLATFORMS = "iphoneos iphonesimulator";
 				SUPPORTS_MACCATALYST = NO;
