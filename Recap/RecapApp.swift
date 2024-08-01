@@ -10,6 +10,8 @@ struct RecapApp: App {
     @StateObject private var quizStorage = QuizStorage()
     @StateObject private var userPreferences = UserPreferences()
     
+    @AppStorage("showOnboarding") var showOnboarding: Bool = AppSettings.showOnboarding
+    
     var body: some Scene {
         WindowGroup {
             ContentView()
@@ -58,6 +60,9 @@ struct RecapApp: App {
                         
                         Spacer()
                     }
+                }
+                .fullScreenCover(isPresented: $showOnboarding) {
+                    Onboarding(showOnboarding: $showOnboarding)
                 }
         }
     }

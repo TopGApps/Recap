@@ -75,6 +75,11 @@ struct ContentView: View {
     let options = ["gemini-1.5-pro-latest", "gemini-1.5-flash"]
     let gptOptions = ["gpt-3.5-turbo", "gpt-4-turbo", "gpt-4o"]
     
+    @AppStorage("preferredModel") var preferredModel: String = UserPreferences.shared.preferredModel
+    
+    @AppStorage("apiKey") var key: String = UserPreferences.shared.apiKey
+    @AppStorage("chatGPTAPIKey") var chatGPTAPIKey: String = UserPreferences.shared.chatGPTAPIKey
+    
     @State private var quiz: Quiz?
     @State private var showingQuizSheet = false
     @State private var showingQuizCustomizationSheet = false
@@ -92,10 +97,6 @@ struct ContentView: View {
     @State private var errorText = "Unknown error has occured! Please try a different prompt."
     
     @State private var userInput = ""
-    //@AppStorage("numberOfQuestions") private var numberOfQuestions = 5
-    
-    // Settings
-    //@AppStorage("geminiModel") private var geminiModel = AppSettings.geminiModel
     let geminiModels = ["1.5 Pro", "1.5 Flash"]
     
     // Web Search
@@ -144,9 +145,8 @@ struct ContentView: View {
             ZStack {
                 GeometryReader { geometry in
                     ScrollView {
-                        
                         VStack {
-                            Spacer() // Pushes content down
+                            Spacer()
                             
                             Text("Recap AI")
                                 .font(.largeTitle)
@@ -161,6 +161,7 @@ struct ContentView: View {
                                 .shimmering(
                                     active: gemeniGeneratingQuiz
                                 )
+
                             
                             Spacer()
                         }
@@ -169,6 +170,7 @@ struct ContentView: View {
                     }
                     .scrollDismissesKeyboard(.interactively)
                 }
+
                 VStack {
                     Spacer()
                     
@@ -207,9 +209,10 @@ struct ContentView: View {
                                                             Circle()
                                                                 .stroke(Color.white, lineWidth: 2) // Add a white outline
                                                         )
+
                                                 }
-                                                .padding(3)
                                             }
+
                                         }
                                         
                                         ForEach(selectedPhotosData, id: \.self) { photoData in
@@ -270,17 +273,23 @@ struct ContentView: View {
                                                         
                                                     }
                                                     .padding(3)
+
                                                 }
                                             }
+                                            Spacer()
                                         }
                                         Spacer()
                                     }
+
                                 }
                                 .mask {
                                     RoundedRectangle(cornerRadius: 16)
                                         .fill(Color.white) // or any other background color
+
                                 }
+                                .padding(.horizontal)
                             }
+
                             .padding(.horizontal)
                         }
                         
@@ -322,10 +331,12 @@ struct ContentView: View {
                                                             print("Failed to fetch YouTube transcript for video ID \(videoId): \(error)")
                                                         }
                                                         group.leave()
+
                                                     }
                                                 } else {
                                                     group.leave()
                                                 }
+
                                             } else if url.pathExtension == "pdf" {
                                                 // Handle PDF files
                                                 if let pdfDocument = PDFDocument(url: url) {
@@ -404,8 +415,11 @@ struct ContentView: View {
                                     //                                    .padding(.trailing)
                                     //.background(Color.accentColor)
                                     //.clipShape(RoundedRectangle(cornerRadius: 15))
+
                                 }
+                                .disabled(gemeniGeneratingQuiz || (userInput.isEmpty && selectedPhotosData.count == 0 && links.count == 0))
                             }
+
                             .accessibilityLabel("Generate Quiz")
                             .padding(.trailing)
                             .disabled(gemeniGeneratingQuiz || (userInput.isEmpty && selectedPhotosData.count == 0 && links.count == 0))
@@ -467,6 +481,7 @@ struct ContentView: View {
                                                         // Append the resized image data to the selectedPhotosData array.
                                                         await MainActor.run {
                                                             selectedPhotosData.append(resizedImageData)
+
                                                         }
                                                     }
                                                 }
@@ -474,7 +489,22 @@ struct ContentView: View {
                                         }
                                     }
                                 }
+                                
+                                Button {
+                                    showingURLSheet = true
+                                } label: {
+                                    if links.count == 1 {
+                                        Label("\(links.count != 0 ? "\(links.count) Link" : "")", systemImage: "link.badge.plus")
+                                    } else if links.count == 0 {
+                                        Image(systemName: "link.badge.plus")
+                                    } else {
+                                        Label("\(links.count != 0 ? "\(links.count) Links" : "")", systemImage: "link.badge.plus")
+                                    }
+                                }
+                                .buttonStyle(.bordered)
+                                .clipShape(RoundedRectangle(cornerRadius: 100.00))
                             }
+
                             
                             Button {
                                 showingURLSheet = true
@@ -501,6 +531,7 @@ struct ContentView: View {
                 
                 //.navigationTitle("Recap")
                 //.navigationBarTitleDisplayMode(.inline)
+
                 .toolbar {
                     ToolbarItem(placement: .topBarTrailing) {
                         Button {
@@ -532,7 +563,6 @@ struct ContentView: View {
                         focus = .api
                     }
                 }
-                
                 .alert(errorText, isPresented: $showingGeminiFailAlert) {}
                 .sheet(isPresented: $showingQuizResults) {
                     if quiz != nil {
@@ -609,7 +639,6 @@ struct ContentView: View {
                     .presentationDetents([.large, .medium])
                 }
                 .onOpenURL { url in
-                    // Handle the URL to load the quiz
                     if apiKey != "" {
                         Task {
                             await loadQuiz(from: url)
@@ -646,14 +675,7 @@ struct ContentView: View {
                             }
                             
                             Section {
-                                // Button {
-                                //     links.append("")
-                                // } label: {
-                                //     Label("Add New Link", systemImage: "plus")
-                                // }
-                                // .disabled(links.count == 5)
                                 Menu {
-                                    //use clipboard
                                     Button {
                                         if let clipboard = UIPasteboard.general.string {
                                             links.append(clipboard)
@@ -692,18 +714,19 @@ struct ContentView: View {
                     }
                     .presentationDetents([.medium, .large])
                 }
-                //show
                 .sheet(isPresented: $showingAllQuizzes) {
                     NavigationStack {
                         List {
                             ForEach(quizStorage.history.indices.reversed(), id: \.self) { i in
                                 Menu {
-                                    //share quiz
                                     ShareLink(item: ExportableQuiz(quiz: quizStorage.history[i]), preview: SharePreview(quizStorage.history[i].quiz_title, icon: "square.and.arrow.up"))
                                     Button(action: {
+
                                         //remove current quiz:
                                         showingAllQuizzes = false
+
                                         quiz = quizStorage.history[i]
+                                        
                                         withAnimation {
                                             showQuiz.toggle()
                                         }
@@ -721,7 +744,6 @@ struct ContentView: View {
                                     }
                                     
                                     Button(action: {
-                                        // Implement action to regenerate the quiz
                                     }) {
                                         Label("Regenerate Quiz", systemImage: "gobackward")
                                     }
@@ -736,10 +758,6 @@ struct ContentView: View {
                                                 .foregroundStyle(.secondary)
                                         }
                                         Spacer()
-                                        //                                        if quizStorage.history[i].userAnswers != nil {
-                                        //                                            Text("\(quizStorage.history[i].userAnswers!.filter { $0.isCorrect == true }.count)/\(quizStorage.history[i].questions.count) (\(Int((Double(quizStorage.history[i].userAnswers!.filter { $0.isCorrect == true }.count) / Double(quizStorage.history[i].questions.count)) * 100))%)")
-                                        //                                                .foregroundStyle(.secondary)
-                                        //                                        }
                                         if let userAnswers = quizStorage.history[i].userAnswers {
                                             Text("\((userAnswers.filter { $0.isCorrect }.count))/\(quizStorage.history[i].questions.count) (\(String(format: "%.0f", (Double(userAnswers.filter { $0.isCorrect }.count) / Double(quizStorage.history[i].questions.count) * 100)))%)")
                                                 .foregroundStyle(.secondary)
@@ -747,8 +765,6 @@ struct ContentView: View {
                                     }
                                 }
                             }
-                            // button to clear history
-                            
                         }
                         .navigationTitle("All Quizzes")
                         .navigationBarTitleDisplayMode(.inline)
@@ -759,26 +775,34 @@ struct ContentView: View {
                                             showingAllQuizzes = false
                                         }
                                     }
+                            
                             ToolbarItem(placement: .topBarLeading) {
-                                Button("Clear All") {
-                                    showingClearHistoryActionSheet = true
+                                Menu {
+                                    Button {
+                                        showingClearHistoryActionSheet = true
+                                    } label: {
+                                        Label("Clear All", systemImage: "trash")
+                                    }
+                                    .foregroundStyle(.red)
+                                    .actionSheet(isPresented: $showingClearHistoryActionSheet) {
+                                        ActionSheet(
+                                            title: Text("Are you sure you want to clear history?"),
+                                            buttons: [
+                                                .destructive(Text("Clear"), action: {
+                                                    quizStorage.history.removeAll()
+                                                    Task {
+                                                        await quizStorage.save(history: [])
+                                                    }
+                                                    showingAllQuizzes = false
+                                                }),
+                                                .cancel()
+                                            ]
+                                        )
+                                    }
+                                } label: {
+                                    Text("Edit")
                                 }
-                                .foregroundStyle(.red)
-                                .actionSheet(isPresented: $showingClearHistoryActionSheet) {
-                                    ActionSheet(
-                                        title: Text("Are you sure you want to clear history?"),
-                                        buttons: [
-                                            .destructive(Text("Clear"), action: {
-                                                quizStorage.history.removeAll()
-                                                Task {
-                                                    await quizStorage.save(history: [])
-                                                }
-                                                showingAllQuizzes = false
-                                            }),
-                                            .cancel()
-                                        ]
-                                    )
-                                }
+                                
                             }
                         }
                     }
@@ -802,8 +826,18 @@ struct ContentView: View {
                     NavigationStack {
                         Form {
                             Section("AI Model") {
-                                Toggle(isOn: .constant(true)) {
-                                    Label("Use Gemini", systemImage: "cpu")
+                                Picker("Preferred AI Model", selection: $userPreferences.preferredModel) {
+                                    Button {
+                                        preferredModel = "ChatGPT"
+                                    } label: {
+                                        Text("ChatGPT")
+                                    }
+                                    
+                                    Button {
+                                        preferredModel = "Gemini"
+                                    } label: {
+                                        Text("Gemini")
+                                    }
                                 }
                             }
                             
@@ -927,14 +961,11 @@ struct ContentView: View {
                     }
                     .presentationDetents([.medium, .large])
                 }
-                
             }
-            //        }
         }
     }
     
     private var theme: Splash.Theme {
-        // NOTE: We are ignoring the Splash theme font
         switch self.colorScheme {
         case .dark:
             return .wwdc17(withFont: .init(size: 16))
@@ -1031,7 +1062,6 @@ struct QuizResultsView: View {
                 Section {
                     VStack {
                         HStack {
-                            //did they get it correct or incorrect
                             if userAnswer.isCorrect {
                                 Image(systemName: "checkmark.circle.fill")
                                     .foregroundStyle(.green)
@@ -1059,14 +1089,9 @@ struct QuizResultsView: View {
                         HStack {
                             Markdown(userAnswer.question.question.replacingOccurrences(of: "<`>", with: "```"))
                                 .markdownCodeSyntaxHighlighter(.splash(theme: self.theme))
-                            //.bold()
                                 .multilineTextAlignment(.leading)
-                            //                                    if userAnswer.question.type == "multiple_choice" {
-                            //                                        Spacer()
-                            //                                    }
                             Spacer()
                         }
-                        //                                .padding(.vertical)
                     }
                     if userAnswer.question.type == "multiple_choice" {
                         ForEach(userAnswer.question.options ?? [], id: \.text) { option in
@@ -1113,7 +1138,6 @@ struct QuizResultsView: View {
         }
     }
     private var theme: Splash.Theme {
-        // NOTE: We are ignoring the Splash theme font
         switch self.colorScheme {
         case .dark:
             return .wwdc17(withFont: .init(size: 16))
