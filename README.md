@@ -126,9 +126,6 @@ This project is licensed under the Apache Version 2 License - see the [`LICENSE`
 - **Aaron Ma** - [GitHub](https://github.com/aaronhma)
 - **Vaibhav Satishkumar** - [GitHub](https://github.com/Visual-Studio-Coder)
 
-## Contact
-For any inquiries, please contact [vsdev@duck.com](mailto:vsdev@duck.com).
-
 ---
 
 Why not download our previous app, [QR Share Pro](https://apps.apple.com/us/app/qr-share-pro/id6479589995)? It's 100% free, no ads, no in-app purchases, doesn't sell your data or track you, and is [open-source on GitHub](https://github.com/visual-studio-coder/qr-share-pro).
