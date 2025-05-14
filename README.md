@@ -57,8 +57,8 @@ TL;DR
 </details>
 
 ## How to generate a quiz using Recap
-1. Install [Recap](https://apps.apple.com/us/app/recap-ai/id6602897472) from the App Store.
-- You can also follow these [installation instructions](#installation) to install it from GitHub
+
+1. Install the app.
 2. Complete the Onboarding process and input your free Gemini [API key](https://aistudio.google.com/app/apikey)
 - If you aren't able to get the key from your iPhone, try opening the link on your laptop.
 - When you attempt to generate a quiz, you'll see a popup saying "Input your API key!" To fix this, open `Settings` (top right corner), scroll down, and click on `Gemini` under the model configurations. You'll see a textfield with a place to input your API key.
@@ -124,8 +124,16 @@ This project is licensed under the Apache Version 2 License - see the [`LICENSE`
 
 ## Authors and Acknowledgments
 - **Aaron Ma** - [GitHub](https://github.com/aaronhma)
+
+<details>
+<summary>Former contributors</summary>
+
 - **Vaibhav Satishkumar** - [GitHub](https://github.com/Visual-Studio-Coder)
+
+Removed due to spam comments & source code theft,
+
+</details>
 
 ---
 
-Why not download our previous app, [QR Share Pro](https://apps.apple.com/us/app/qr-share-pro/id6479589995)? It's 100% free, no ads, no in-app purchases, doesn't sell your data or track you, and is [open-source on GitHub](https://github.com/visual-studio-coder/qr-share-pro).
+Check out [QR Share Pro](https://github.com/topgapps/qr-share-pro)!
