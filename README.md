@@ -86,7 +86,7 @@ As mentioned previously, we prompt Gemini with your input, and it returns a JSON
 
 ## Disclaimers
 > [!WARNING]
-> While we, Recap, do not collect any data from our users, there's nothing stopping Google from collecting YOUR data, so be sure to read *their* privacy policies to be aware of what's going on. Read our [`Privacy Policy`](https://github.com/TopGApps/Recap/blob/master/Privacy.md) for more information about this
+> While we, Recap, do not collect any data from our users, there's nothing stopping Google from collecting YOUR data, so be sure to read *their* privacy policies to be aware of what's going on. Read our [`Privacy Policy`](https://github.com/TopGApps/Recap/blob/master/PRIVACY.md) for more information about this
 
 > [!CAUTION]
 > When inputting your personal API key, be aware of the fact that on a free account, your prompts are linked to your identity and are used to train their models.
@@ -130,7 +130,7 @@ This project is licensed under the Apache Version 2 License - see the [`LICENSE`
 
 - **Vaibhav Satishkumar** - [GitHub](https://github.com/Visual-Studio-Coder)
 
-Removed due to spam comments & source code theft,
+Removed due to abusive spam comments & [source code theft](https://github.com/github/dmca/blob/master/2025/05/2025-05-12-recap.md)
 
 </details>
 
